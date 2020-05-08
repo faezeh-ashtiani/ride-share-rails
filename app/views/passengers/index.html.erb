@@ -1,0 +1,14 @@
+<h2>Passenger Page ♡</h2>
+<% if @passengers.length > 0 %>
+    <ul>
+      <% @passengers.each do |passenger| %>
+        <li>
+          <%= link_to passenger.name, passenger_path(passenger)%> |
+          <span>Edit</span> |
+          <span>Delete</span>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+      <h3>No passenger found</h3>
+  <% end %>
