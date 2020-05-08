@@ -36,4 +36,6 @@ Rails.application.routes.draw do
   #custom routes - making a passenger as read 
   # patch '/passengers/:id/mark_read', to: 'passengers#mark_read', as: 'passenger_read' #making up new extension is ok 
   ## would nn to make view with touch app/views/passengers/mark_read.html.erb
+
+  resources :drivers
 end
