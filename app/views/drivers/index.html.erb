@@ -1,0 +1,11 @@
+<h2>Drivers</h2>
+<ul>
+  <% @drivers.each do |driver| %>
+    <li>
+      <%= link_to driver.name, driver_path(driver.id) %> | 
+      rating |
+      edit | 
+      delete
+    </li>
+  <% end %>
+</ul>
