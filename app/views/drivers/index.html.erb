@@ -1,11 +1,13 @@
-<h2>Drivers</h2>
-<ul>
-  <% @drivers.each do |driver| %>
-    <li>
-      <%= link_to driver.name, driver_path(driver.id) %> | 
-      rating |
-      edit | 
-      delete
-    </li>
-  <% end %>
-</ul>
+<div class='drivers'>
+  <h2>Rideshare Drivers</h2>
+  <ul class='drivers-list'>
+    <% @drivers.each do |driver| %>
+      <li class='drivers-list-item'>
+        <strong><%= link_to driver.name, driver_path(driver.id) %></strong> | 
+        rating |
+        edit | 
+        delete
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -9,12 +9,10 @@
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <header>
-    <nav>
-      <ul>
-        <li>Rideshare Rails!</li>
-        <li><%= link_to "Drivers", drivers_path %></li>
-        <li>Passengers</li>
-      </ul>
+    <nav class='navigation-bar'>
+      <h3><%= link_to "Rideshare Rails!", root_path %></h3>
+      <h3><%= link_to "Drivers", drivers_path %></h3>
+      <h3><%= link_to "Passengers", passengers_path %></h3>
     </nav>
 
   </header>

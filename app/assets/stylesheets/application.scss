@@ -16,3 +16,25 @@
 @import "bootstrap";
 
 @import "**/*";
+
+.navigation-bar {
+  background-color: tomato;
+  display: flex;
+  padding: 10px 30px 10px 30px;
+  justify-content: space-between;
+}
+
+a {
+  color: black;
+}
+a:link {
+  text-decoration: none;
+}
+
+a:hover {
+  cursor: -moz-grab;
+}
+
+a:active {
+  text-decoration: underline;
+}
