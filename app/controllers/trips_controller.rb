@@ -7,6 +7,24 @@ class TripsController < ApplicationController
       return
     end
   end
+  # def new
+  #   @trip = Trip.new
+  # end 
+
+  def passenger_trip
+    @trip = Trip.new(
+      date: Date.today.to_date, 
+      rating: 0, 
+      cost: rand(500..9999),   
+      passenger_id: params[:passenger_id], 
+      driver_id: rand(1..6)
+    )
+    if @trip.save
+      redirect_to trip_path(@trip.id)
+    else
+      render :new, :bad_request
+    end
+  end 
 
   def edit
     @trip = Trip.find_by(id: params[:id])

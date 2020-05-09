@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   resources :passengers
   resources :drivers
   resources :trips, except: [:index]
+
+  post '/trips/:passenger_id', to: 'trips#passenger_trip', as: 'passenger_trip'
 end
