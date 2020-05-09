@@ -1,0 +1,19 @@
+<div class='trips'>
+  <h2>Trip:</h2>
+  <p>Date: <%= @trip.date.to_date %></p>
+  <p>Rating: <%= @trip.rating %></p>
+  <p>Cost: $<%= @trip.cost / 100 %></p>
+  <p>Driver: <%=
+    link_to Driver.find_by(id: @trip.driver_id).name,
+    driver_path(Driver.find_by(id: @trip.driver_id).id)%>
+  </p>
+  <p>Passenger: <%=
+    link_to Passenger.find_by(id: @trip.passenger_id).name,
+    passenger_path(Passenger.find_by(id: @trip.passenger_id).id)%>
+  </p>
+  <button>
+    <%= link_to 'Edit Trip', edit_trip_path(@trip.id) %>
+  </button>
+
+  
+</div>
