@@ -13,12 +13,17 @@ class PassengersController < ApplicationController
   end 
 
   def new
-
+    @passenger = Passenger.new
   end 
 
 
   def create
-
+    @passenger = Passenger.new(passenger_params)
+    if @passenger.save
+      redirect_to passengers_path
+    else
+      render :new, :bad_request
+    end
   end
 
   def edit
@@ -35,11 +40,8 @@ class PassengersController < ApplicationController
     if @passenger.nil?
       head :not_found
       return
-    elsif @passenger.update(
-      name: params[:passenger][:name], 
-      phone_num: params[:passenger][:phone_num]
-    )
-      redirect_to passengers_path 
+    elsif @passenger.update(passenger_params)
+      redirect_to passenger_path(@passenger.id)
       return
     else 
       render :edit  
@@ -60,4 +62,11 @@ class PassengersController < ApplicationController
     redirect_to passenger_path 
     return
   end 
+
+  private
+
+  def passenger_params
+    return params.require(:passenger).permit(:name, :phone_num)
+  end
+
 end

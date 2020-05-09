@@ -1,3 +1,28 @@
 // Place all the styles related to the Passengers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+.passengers {
+  padding-top: 10px;
+  padding-left: 30px;
+}
+
+.passengers-list {
+  list-style: none;
+  padding: 0;
+}
+
+.passengers-list-item {
+  padding: 5px;
+}
+
+.add-trip-button {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  box-shadow: 5px 10px;
+}
