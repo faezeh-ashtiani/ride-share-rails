@@ -42,7 +42,7 @@ class PassengersController < ApplicationController
       redirect_to passengers_path 
       return
     else 
-      render :edit
+      render :edit  
       return
     end
   end 
