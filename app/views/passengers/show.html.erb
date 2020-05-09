@@ -17,6 +17,7 @@
           Date: <%=trip.date%>, 
           Rating: <%=trip.rating%>
           Cost: $<%=trip.cost.to_f / 100%>
+          | <span class='details-button'><%= link_to 'DETAILS', trip_path(trip.id) %><span>
         </li>
       <%end%>
     <%else%>

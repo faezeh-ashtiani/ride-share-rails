@@ -4,7 +4,11 @@
     <% @drivers.each do |driver| %>
       <li class='drivers-list-item'>
         <strong><%= link_to driver.name, driver_path(driver.id) %></strong> | 
-        <%= driver.trips.length %> trips
+        <%if driver.trips.length == 1%>
+          <%= driver.trips.length %> trip
+        <%else%>
+          <%= driver.trips.length %> trips
+        <%end%>
       </li>
     <% end %>
   </ul>

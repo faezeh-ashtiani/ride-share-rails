@@ -8,15 +8,14 @@
   </ul>
 <% end %>
 
-<h2>Edit Passenger</h2>
 <%= form_with model: @passenger, class: 'passengers' do |f| %>
   <p>Please provide the following information to <%= sentance_end %></p>
   <div>
-    <%= f.label :edit_name%>
+    <%= f.label "Name"%>
     <%= f.text_field :name%>
   </div>
   <div>
-    <%= f.label :edit_phone_number%>
+    <%= f.label "Phone Number".capitalize%>
     <%= f.text_field :phone_num%>
   </div>
   <%= f.submit action_name %>
