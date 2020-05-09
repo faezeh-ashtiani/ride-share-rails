@@ -3,7 +3,7 @@
 <p>Passenger ID: <%=@passenger[:id]%> </p>
 <p>Total Charged: $<%=@passenger.total_cost%> </p>
 <button class='add-trip-button'>
-  <%= link_to 'Start Trip' %>
+  <%= link_to 'Start Trip', passenger_trip_path(@passenger[:id]), method: :post%>
 </button>
 <br>
 <br>
@@ -16,7 +16,7 @@
           Driver: <%=Driver.find_by(id: trip.driver_id).name%>, 
           Date: <%=trip.date%>, 
           Rating: <%=trip.rating%>
-          Cost: <%=trip.cost%>
+          Cost: $<%=trip.cost.to_f / 100%>
         </li>
       <%end%>
     <%else%>
