@@ -1,0 +1,22 @@
+<% if @driver.errors.any? %>
+  <ul class="errors">
+    <% @driver.errors.each do |column, message| %>
+      <li>
+        <strong><%= column.capitalize %></strong> <%= message %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= form_with model: @driver, class: 'drivers' do |f| %>
+  <p>Please provide the following information to <%= sentance_end %></p>
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :vin %>
+    <%= f.text_field :vin %>
+  </div>
+  <%= f.submit action_name %>
+<% end %>
