@@ -1,0 +1,12 @@
+<h2>Edit Passenger</h2>
+<%= form_with model: @passenger, class: 'passenger-form' do |f| %>
+  <div>
+    <%= f.label :edit_name%>
+    <%= f.text_field :name%>
+  </div>
+  <div>
+    <%= f.label :edit_phone_num%>
+    <%= f.text_field :phone_num%>
+  </div>
+  <%= f.submit "Edit Passenger", class: 'edit-passenger-button'%>
+<%end%>
