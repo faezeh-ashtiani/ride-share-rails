@@ -35,7 +35,7 @@ class TripsController < ApplicationController
 
   def trip_params
     return params.require(:trip).permit(
-      date: Date.now,
+      date: Date.today,
       rating: 0,
       cost: rand(500..9999),
       # :passenger_id,
