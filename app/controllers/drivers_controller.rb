@@ -48,6 +48,21 @@ class DriversController < ApplicationController
     end
   end
 
+  # def mark_unavailable
+  #   @driver = Driver.find_by(id: params[:id])
+  #   if @driver.nil?
+  #     head :not_found
+  #     return
+  #   elsif @driver.update(driver_params.merge({available: false}))
+  #     redirect_to trip_path(@driver.trips.last.id)
+  #     return
+  #   else 
+  #     render :edit 
+  #     return
+  #   end
+
+  end
+
   private
 
   def driver_params

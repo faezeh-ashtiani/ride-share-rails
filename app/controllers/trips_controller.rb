@@ -18,6 +18,9 @@ class TripsController < ApplicationController
       driver_id: Driver.available_driver.id
     )
     if @trip.save
+      trip_driver = Driver.find_by(id: @trip.driver_id)
+      trip_driver.update(available: false)
+      # redirect_to mark_unavailable_path(@trip.driver.id)
       redirect_to trip_path(@trip.id)
     else
       head :bad_request

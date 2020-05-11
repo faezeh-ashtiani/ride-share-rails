@@ -1,5 +1,5 @@
 <div class='drivers'>
-  <h2><%= @driver.name %>: <em><%= "available" if @driver.available%></em></h2>
+  <h2><%= @driver.name %>: <em><%= "available" if @driver.available%></em><em><%= "unavailable" if !@driver.available%></em></h2>
   <p>Vehicle id # <%= @driver.vin%></p>
   <p>average rating: <%= @driver.rating%></p>
   <p>total earnings: $<%= @driver.earnings%></p>
