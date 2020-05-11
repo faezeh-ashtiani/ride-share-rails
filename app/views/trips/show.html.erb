@@ -3,17 +3,32 @@
   <p>Date: <%= @trip.date.to_date %></p>
   <p>Rating: <%= @trip.rating %></p>
   <p>Cost: $<%= @trip.cost / 100 %></p>
-  <p>Driver: <%=
-    link_to Driver.find_by(id: @trip.driver_id).name,
-    driver_path(Driver.find_by(id: @trip.driver_id).id)%>
-  </p>
-  <p>Passenger: <%=
-    link_to Passenger.find_by(id: @trip.passenger_id).name,
-    passenger_path(Passenger.find_by(id: @trip.passenger_id).id)%>
-  </p>
-  <button>
+  <%if @trip.driver_id.nil?%>
+      <em>Driver has been removed.</em>
+  <%else%>
+    <p>Driver: <%=
+      link_to Driver.find_by(id: @trip.driver_id).name,
+      driver_path(Driver.find_by(id: @trip.driver_id).id)%>
+    </p>
+  <%end%>
+  <%if @trip.passenger_id.nil?%>
+      <em>Passenger has been removed.</em>
+  <%else%>
+    <p>Passenger: <%=
+      link_to Passenger.find_by(id: @trip.passenger_id).name,
+      passenger_path(Passenger.find_by(id: @trip.passenger_id).id)%>
+    </p>
+  <%end%>
+  <br>
+  <br>
+  <span class="trip-button">
     <%= link_to 'Edit Trip', edit_trip_path(@trip.id) %>
-  </button>
-
-  
+  </span>
+  <span class="trip-button">
+    <%= link_to 'Delete Trip', 
+      trip_path(@trip.id),
+      method: :delete,
+      data: {confirm: "Are you sure you want to delete this trip?"}
+    %>
+  </span>
 </div>

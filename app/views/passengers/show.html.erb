@@ -2,9 +2,9 @@
 <h2><%=@passenger[:name]%></h2>
 <p>Passenger ID: <%=@passenger[:id]%> </p>
 <p>Total Charged: $<%=@passenger.total_cost%> </p>
-<button class='add-trip-button'>
+<div class='add-trip-button'>
   <%= link_to 'Start Trip', passenger_trip_path(@passenger[:id]), method: :post%>
-</button>
+</div>
 <br>
 <br>
 <h4>Trips:</h4>
@@ -13,7 +13,11 @@
       <%@passenger.trips.each do |trip|%>
         <li>
           Trip id: <%=trip.id%>, 
-          Driver: <%=Driver.find_by(id: trip.driver_id).name%>, 
+          <%if trip.driver_id.nil?%>
+            <em>Driver has been removed.</em>
+          <%else%>
+            Driver: <%=Driver.find_by(id: trip.driver_id).name%>, 
+          <%end%>
           Date: <%=trip.date%>, 
           Rating: <%=trip.rating%>
           Cost: $<%=trip.cost.to_f / 100%>
@@ -24,11 +28,11 @@
       <p>No trips yet!</p>
     <%end%>
   </ul>
-<button class="edit-passenger-button">
+<span class="passenger-button">
   <%= link_to "Edit Passenger", edit_passenger_path(@passenger.id)%>
-</button>
-<button class="delete-passenger-button">
+</span>
+<span class="passenger-button">
 <%= link_to "Delete Passenger", passenger_path(@passenger.id), method: :delete, data: {confirm: "Are you sure you want to delete this passenger?"}%> 
-</button>
+</span>
 </div>
 
