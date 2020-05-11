@@ -2,10 +2,10 @@
   <p>Please provide the following information to <%= sentance_end %></p>
   <div>
     <%= f.label :rating %>
-    <%= f.text_field :rating %>
+    <%= f.select :rating, [1, 2, 3, 4, 5] %>
   </div>
   <div>
-    <%= f.label :cost %>
+    <%= f.label "Cost $" %>
     <%= f.text_field :cost %>
   </div>
   <div>

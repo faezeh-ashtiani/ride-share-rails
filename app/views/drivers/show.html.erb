@@ -1,11 +1,8 @@
 <div class='drivers'>
   <h2><%= @driver.name %>: <em><%= "available" if @driver.available%></em></h2>
   <p>Vehicle id # <%= @driver.vin%></p>
-  <button>
-    <%= link_to 'Edit Driver', edit_driver_path(@driver.id) %>
-  </button>
-  <p>average rating: <%= @driver.rating%> |</p>
-  <p>total earnings: $<%= @driver.earnings%> |</p>
+  <p>average rating: <%= @driver.rating%></p>
+  <p>total earnings: $<%= @driver.earnings%></p>
   <h4>Trips: <%= "none" if @driver.trips.length == 0 %></h4>
   <ul>
     <% @driver.trips.each do |trip|%>
@@ -15,9 +12,12 @@
         Date: <%= trip.date %>,
         Rating: <%= trip.rating %>,
         Cost: <%= trip.cost %>
-        |<span class='details-button'><%= link_to 'DETAILS', trip_path(trip.id) %><span>
+        | <span class='details-button'><%= link_to 'DETAILS', trip_path(trip.id) %><span>
        
       </li>
     <% end %>
   </ul>
+  <button>
+    <%= link_to 'Edit Driver', edit_driver_path(@driver.id) %>
+  </button>
 </div>

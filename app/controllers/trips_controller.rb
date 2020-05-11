@@ -7,22 +7,20 @@ class TripsController < ApplicationController
       return
     end
   end
-  # def new
-  #   @trip = Trip.new
-  # end 
-
+  
   def passenger_trip
+    # raise
     @trip = Trip.new(
-      date: Date.today.to_date, 
-      rating: 0, 
+      date: Date.today.to_date,
+      rating: 0,
       cost: rand(500..9999),   
-      passenger_id: params[:passenger_id], 
-      driver_id: rand(1..6)
+      passenger_id: params[:passenger_id],
+      driver_id: Driver.available_driver.id
     )
     if @trip.save
       redirect_to trip_path(@trip.id)
     else
-      render :new, :bad_request
+      head :bad_request
     end
   end 
 
@@ -36,11 +34,13 @@ class TripsController < ApplicationController
   end
 
   def update
-    @Trip = Trip.find_by(id: params[:id])
-    if @Trip.nil?
+    # raise
+    @trip = Trip.find_by(id: params[:id])
+    params = trip_params
+    if @trip.nil?
       head :not_found
       return
-    elsif @Trip.update(trip_params)
+    elsif @trip.update(trip_params)
       redirect_to trip_path(@trip.id) 
       return
     else 
@@ -52,13 +52,19 @@ class TripsController < ApplicationController
   private
 
   def trip_params
-    return params.require(:trip).permit(
+    default_params_hash = {
       date: Date.today,
       rating: 0,
-      cost: rand(500..9999),
-      # :passenger_id,
-      # :driver_id
+      cost: rand(500..9999)
+    }
+    permitted_params = params.require(:trip).permit(
+      :date,
+      :rating,
+      :cost,
+      :passenger_id,
+      :driver_id
     )
+    return default_params_hash.merge(permitted_params)
   end
 
 end

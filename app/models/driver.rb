@@ -15,4 +15,8 @@ class Driver < ApplicationRecord
     end
   end
 
+  def self.available_driver
+    all.select { |driver| driver.available == true }.first
+    # Driver.find_by(available: true)
+  end
 end
