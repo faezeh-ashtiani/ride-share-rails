@@ -15,14 +15,27 @@
   padding: 5px;
 }
 
-.add-trip-button a{
+.add-trip-button {
   background-color: #4CAF50; /* Green */
-  border: none;
   color: white;
-  padding: 15px 32px;
+  padding: 10px 30px;
   text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
+  // text-decoration: none;
+  // display: inline-block;
+  // font-size: 16px;
   // box-shadow: 5px 10px;
+}
+
+.edit-passenger-button {
+  background-color: lightsteelblue; 
+  color: white;
+  padding: 10px 30px;
+  text-align: center;
+}
+
+.delete-passenger-button {
+  background-color: lightsteelblue; 
+  color: white;
+  padding: 10px 30px;
+  text-align: center;
 }
