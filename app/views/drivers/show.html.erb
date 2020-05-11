@@ -7,8 +7,12 @@
   <ul>
     <% @driver.trips.each do |trip|%>
       <li>
-        Trip id: <%= trip.id %>, 
-        Passenger: <%= Passenger.find_by(id: trip.passenger_id).name %>,
+        Trip id: <%= trip.id %>,
+        <% if trip.passenger_id.nil? %> 
+          <em>Passenger has been removed.</em> 
+        <% else %>
+          Passenger: <%= Passenger.find_by(id: trip.passenger_id).name %>,
+        <% end %>
         Date: <%= trip.date %>,
         Rating: <%= trip.rating %>,
         Cost: <%= trip.cost %>
