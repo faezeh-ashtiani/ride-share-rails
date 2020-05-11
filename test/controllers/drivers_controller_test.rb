@@ -6,22 +6,30 @@ describe DriversController do
   describe "index" do
     it "responds with success when there are many drivers saved" do
       # Arrange
+      Driver.create({
+        name: "June Bug",
+        vin: "UTGFEE6457426GYR",
+        available: true
+      })
       # Ensure that there is at least one Driver saved
-
+      
       # Act
-
+      get "/drivers"
       # Assert
+      must_respond_with :success
 
     end
 
     it "responds with success when there are no drivers saved" do
       # Arrange
       # Ensure that there are zero drivers saved
-
+      Driver.all.each do |driver|
+        driver.destroy
+      end
       # Act
-
+      get "/drivers"
       # Assert
-
+      must_respond_with :success
     end
   end
 
@@ -29,21 +37,30 @@ describe DriversController do
     it "responds with success when showing an existing valid driver" do
       # Arrange
       # Ensure that there is a driver saved
+      driver = Driver.create({
+        name: "June Bug",
+        vin: "UTGFEE6457426GYR",
+        available: true
+      })
 
       # Act
+      get "/drivers/#{driver.id}"
 
       # Assert
+      must_respond_with :success
 
     end
 
     it "responds with 404 with an invalid driver id" do
       # Arrange
       # Ensure that there is an id that points to no driver
+      invalid_id = -1
 
       # Act
+      get "/drivers/#{invalid_id}"
 
       # Assert
-
+      must_respond_with :not_found
     end
   end
 
