@@ -9,23 +9,27 @@ class TripsController < ApplicationController
   end
   
   def passenger_trip
-    # raise
-    @trip = Trip.new(
-      date: Date.today.to_date,
-      rating: 0,
-      cost: rand(500..9999),   
-      passenger_id: params[:passenger_id],
-      driver_id: Driver.available_driver.id
-    )
-    if @trip.save
-      trip_driver = Driver.find_by(id: @trip.driver_id)
-      trip_driver.update(available: false)
-      # redirect_to mark_unavailable_path(@trip.driver.id)
-      # check the update if an if statement
-      redirect_to trip_path(@trip.id)
+    
+    driver = Driver.available_driver
+    if !driver.nil?
+      @trip = Trip.new(
+        date: Date.today.to_date,
+        rating: 0,
+        cost: rand(500..9999),   
+        passenger_id: params[:passenger_id],
+        driver_id: driver.id
+      )
+      if @trip.save
+        trip_driver = Driver.find_by(id: @trip.driver_id)
+        trip_driver.update(available: false)
+        # check the update if an if statement
+        redirect_to trip_path(@trip.id)
+      else
+        head :bad_request
+      end
     else
-      head :bad_request
-    end
+      redirect_to passenger_path(params[:passenger_id])
+    end 
   end 
 
   def edit

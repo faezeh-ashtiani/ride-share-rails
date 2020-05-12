@@ -61,11 +61,64 @@ describe PassengersController do
   end
 
   describe "new" do
-    # Your tests go here
+    it "responds with success" do
+      Passenger.new({
+        name: "June Bug",
+        phone_num: "209-823-4034"
+      })
+
+      get "/passengers/new"
+
+      must_respond_with :success
+
+    end
   end
 
   describe "create" do
-    # Your tests go here
+    it "can create a new passenger with valid information accurately, and redirect" do
+      # Arrange
+      # Set up the form data
+      passenger_hash = {
+        passenger: {
+        name: "June Bug",
+        phone_num: "UTGFEE6457426GYR"
+      }
+    }
+
+      # Act-Assert
+      # Ensure that there is a change of 1 in Driver.count
+    expect {
+      post passengers_path, params: passenger_hash
+    }.must_differ 'Passenger.count', 1
+      # Assert
+      # Find the newly created Driver, and check that all its attributes match what was given in the form data
+      # Check that the controller redirected the user
+    must_redirect_to passengers_path
+    passenger = Passenger.find_by(name: "June Bug")
+    expect(passenger.name).must_equal passenger_hash[:passenger][:name]
+    expect(passenger.phone_num).must_equal passenger_hash[:passenger][:phone_num]
+    end
+
+    it "does not create a passenger if the form data violates Passenger validations, and responds with bad_request" do
+      # Arrange
+      passenger_hash = {
+        passenger: {
+        name: "June Bug",
+        phone_num: "209-823-4034"
+        }
+      }
+      # Set up the form data so that it violates Driver validations
+      passenger_hash[:passenger][:name] = nil
+      # Act-Assert
+      # Ensure that there is no change in Driver.count
+      expect {
+        post passengers_path, params: passenger_hash
+      }.must_differ "Passenger.count", 0
+      # Assert
+      # Check that the controller renders bad_request
+      must_respond_with :bad_request
+    end
+
   end
 
   describe "edit" do

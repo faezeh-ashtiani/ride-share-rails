@@ -66,6 +66,16 @@ describe DriversController do
 
   describe "new" do
     it "responds with success" do
+      Driver.new({
+        name: "June Bug",
+        vin: "UTGFEE6457426GYR",
+        available: true
+      })
+
+      get "/drivers/new"
+
+      must_respond_with :success
+
     end
   end
 
@@ -73,27 +83,69 @@ describe DriversController do
     it "can create a new driver with valid information accurately, and redirect" do
       # Arrange
       # Set up the form data
+      driver_hash = {
+        driver: {
+        name: "June Bug",
+        vin: "UTGFEE6457426GYR",
+        available: true
+      }
+    }
 
       # Act-Assert
       # Ensure that there is a change of 1 in Driver.count
-
+    expect {
+      post drivers_path, params: driver_hash
+    }.must_differ 'Driver.count', 1
       # Assert
       # Find the newly created Driver, and check that all its attributes match what was given in the form data
       # Check that the controller redirected the user
+    must_redirect_to drivers_path
+    driver = Driver.find_by(name: "June Bug")
+    expect(driver.name).must_equal driver_hash[:driver][:name]
+    expect(driver.vin).must_equal driver_hash[:driver][:vin]
+    expect(driver.available).must_equal driver_hash[:driver][:available]
+
 
     end
 
-    it "does not create a driver if the form data violates Driver validations, and responds with a redirect" do
-      # Note: This will not pass until ActiveRecord Validations lesson
+    it "defaults to driver available when created" do
       # Arrange
-      # Set up the form data so that it violates Driver validations
+      # Set up the form data
+      driver_hash = {
+        driver: {
+        name: "June Bug",
+        vin: "UTGFEE6457426GYR"
+        }
+      }
 
+      # Act
+      expect {
+        post drivers_path, params: driver_hash
+      }.must_differ 'Driver.count', 1
+  
+      # Assert
+      expect(Driver.last.available).must_equal true
+
+    end
+
+    it "does not create a driver if the form data violates Driver validations, and responds with bad_request" do
+      # Arrange
+      driver_hash = {
+        driver: {
+        name: "June Bug",
+        vin: "UTGFEE6457426GYR"
+        }
+      }
+      # Set up the form data so that it violates Driver validations
+      driver_hash[:driver][:name] = nil
       # Act-Assert
       # Ensure that there is no change in Driver.count
-
+      expect {
+        post drivers_path, params: driver_hash
+      }.must_differ "Driver.count", 0
       # Assert
-      # Check that the controller redirects
-
+      # Check that the controller renders bad_request
+      must_respond_with :bad_request
     end
   end
   
