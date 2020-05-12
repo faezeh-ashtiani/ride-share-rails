@@ -81,24 +81,22 @@ describe TripsController do
     end
   
     it "assigns available driver & changes drivers status to unavailable" do 
-      ### NOT WORKING YET
+  
+      available_drivers = Driver.where(available: true)
+      before_count = available_drivers.length
 
-      #call available driver 
-      # driver = Driver.available_driver
-      # puts driver
-      # an array of all the avalable drivers
-
-
-      #make trip with forcing in our new driver  
       expect {
         post passenger_trip_path(@passenger.id)
       }.must_differ 'Trip.count', 1
-      # puts Driver.find_by(id: Trip.last.driver_id) #trip is not assigning our prev driver
-      # puts driver.available
+
       driver = Driver.find_by(id: Trip.last.driver_id)
-      # test that driver is one of the drivers from the array (shows that it was available)
-      #check his status to see if he is now unavailable 
+
+      expect(available_drivers.include?(driver)).must_equal true
       expect(driver.available).must_equal false
+      
+      available_drivers = Driver.where(available: true)
+      after_count = available_drivers.length
+      expect(after_count).must_equal (before_count - 1)
 
     end 
 
