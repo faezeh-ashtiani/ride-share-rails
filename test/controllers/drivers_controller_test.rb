@@ -295,7 +295,7 @@ describe DriversController do
       must_redirect_to drivers_path
     end
 
-    it "does not change the db when the driver does not exist, then responds with " do
+    it "does not change the db when the driver does not exist, then responds with not found" do
       # Arrange
       # Ensure there is an invalid id that points to no driver
       invalid_id = -1
