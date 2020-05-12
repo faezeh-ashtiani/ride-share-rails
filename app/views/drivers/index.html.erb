@@ -1,5 +1,6 @@
 <div class='drivers'>
   <h2>Rideshare Drivers</h2>
+  <span class="details-button"><%= paginate @drivers%></span>
   <ul class='drivers-list'>
     <% @drivers.each do |driver| %>
       <li class='drivers-list-item'>

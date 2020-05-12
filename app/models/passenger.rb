@@ -3,6 +3,8 @@ class Passenger < ApplicationRecord
   validates :name, presence: true, uniqueness: true
   validates :phone_num, presence: true, length: {minimum: 10} #must contain 10 letters 
 
+  paginates_per 15
+
   def total_cost
     (self.trips.sum {|trip| trip.cost.to_f}) / 100
   end

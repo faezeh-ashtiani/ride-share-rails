@@ -1,5 +1,6 @@
 <div class='passengers'>
   <h2>RideShare Passengers</h2>
+  <span class="details-button"><%= paginate @passengers%></span>
   <% if @passengers.length > 0 %>
       <ul class='passengers-list'>
         <% @passengers.each do |passenger| %>

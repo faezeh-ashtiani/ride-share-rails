@@ -3,6 +3,8 @@ class Driver < ApplicationRecord
   validates :name, presence: true
   validates :vin, presence: true, uniqueness: true
 
+  paginates_per 15
+  
   def earnings
     (self.trips.sum { |trip| trip.cost / 100 - 1.65 } * 0.8).round(2)
   end
