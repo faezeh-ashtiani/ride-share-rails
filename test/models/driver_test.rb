@@ -15,8 +15,8 @@ describe Driver do
     driver = Driver.first
     [:name, :vin, :available].each do |field|
 
-      # Assert
-      expect(driver).must_respond_to field
+    # Assert
+    expect(driver).must_respond_to field
     end
   end
 

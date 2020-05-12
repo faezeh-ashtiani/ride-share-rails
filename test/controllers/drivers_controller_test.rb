@@ -6,11 +6,13 @@ describe DriversController do
   describe "index" do
     it "responds with success when there are many drivers saved" do
       # Arrange
-      Driver.create({
-        name: "June Bug",
-        vin: "UTGFEE6457426GYR",
-        available: true
-      })
+      Driver.create(
+        {
+          name: "June Bug",
+          vin: "UTGFEE6457426GYR",
+          available: true
+       }
+      )
       # Ensure that there is at least one Driver saved
       
       # Act
@@ -37,11 +39,13 @@ describe DriversController do
     it "responds with success when showing an existing valid driver" do
       # Arrange
       # Ensure that there is a driver saved
-      driver = Driver.create({
-        name: "June Bug",
-        vin: "UTGFEE6457426GYR",
-        available: true
-      })
+      driver = Driver.create(
+        {
+          name: "June Bug",
+          vin: "UTGFEE6457426GYR",
+          available: true
+        }
+      )
 
       # Act
       get "/drivers/#{driver.id}"
@@ -66,11 +70,13 @@ describe DriversController do
 
   describe "new" do
     it "responds with success" do
-      Driver.new({
-        name: "June Bug",
-        vin: "UTGFEE6457426GYR",
-        available: true
-      })
+      Driver.new(
+        {
+          name: "June Bug",
+          vin: "UTGFEE6457426GYR",
+          available: true
+        }
+      )
 
       get "/drivers/new"
 
@@ -84,27 +90,27 @@ describe DriversController do
       # Arrange
       # Set up the form data
       driver_hash = {
-        driver: {
-        name: "June Bug",
-        vin: "UTGFEE6457426GYR",
-        available: true
+        driver: 
+        {
+          name: "June Bug",
+          vin: "UTGFEE6457426GYR",
+          available: true
+        }
       }
-    }
 
       # Act-Assert
       # Ensure that there is a change of 1 in Driver.count
-    expect {
-      post drivers_path, params: driver_hash
-    }.must_differ 'Driver.count', 1
+      expect {
+        post drivers_path, params: driver_hash
+      }.must_differ 'Driver.count', 1
       # Assert
       # Find the newly created Driver, and check that all its attributes match what was given in the form data
       # Check that the controller redirected the user
-    must_redirect_to drivers_path
-    driver = Driver.find_by(name: "June Bug")
-    expect(driver.name).must_equal driver_hash[:driver][:name]
-    expect(driver.vin).must_equal driver_hash[:driver][:vin]
-    expect(driver.available).must_equal driver_hash[:driver][:available]
-
+      must_redirect_to drivers_path
+      driver = Driver.find_by(name: "June Bug")
+      expect(driver.name).must_equal driver_hash[:driver][:name]
+      expect(driver.vin).must_equal driver_hash[:driver][:vin]
+      expect(driver.available).must_equal driver_hash[:driver][:available]
 
     end
 
@@ -112,9 +118,10 @@ describe DriversController do
       # Arrange
       # Set up the form data
       driver_hash = {
-        driver: {
-        name: "June Bug",
-        vin: "UTGFEE6457426GYR"
+        driver: 
+        {
+          name: "June Bug",
+          vin: "UTGFEE6457426GYR"
         }
       }
 
@@ -131,9 +138,10 @@ describe DriversController do
     it "does not create a driver if the form data violates Driver validations, and responds with bad_request" do
       # Arrange
       driver_hash = {
-        driver: {
-        name: "June Bug",
-        vin: "UTGFEE6457426GYR"
+        driver: 
+        {
+          name: "June Bug",
+          vin: "UTGFEE6457426GYR"
         }
       }
       # Set up the form data so that it violates Driver validations
@@ -153,11 +161,13 @@ describe DriversController do
     it "responds with success when getting the edit page for an existing, valid driver" do
       # Arrange
       # Ensure there is an existing driver saved
-      driver = Driver.create({
-        name: "June Bug",
-        vin: "UTGFEE6457426GYR",
-        available: true
-      })
+      driver = Driver.create(
+        {
+          name: "June Bug",
+          vin: "UTGFEE6457426GYR",
+          available: true
+        }
+      )
 
       driver_id = Driver.find_by(name: "June Bug").id
 
@@ -185,18 +195,21 @@ describe DriversController do
       # Ensure there is an existing driver saved
       # Assign the existing driver's id to a local variable
       # Set up the form data
-      driver = Driver.create({
-        name: "June Bug",
-        vin: "UTGFEE6457426GYR",
-        available: true
-      })
+      driver = Driver.create(
+        {
+          name: "June Bug",
+          vin: "UTGFEE6457426GYR",
+          available: true
+        }
+      )
 
       driver_id = Driver.find_by(name: "June Bug").id
 
       driver_hash = {
-        driver: {
-        name: "Driver June Bug",
-        vin: "UTGFEE6457426GYR"
+        driver: 
+        {
+          name: "Driver June Bug",
+          vin: "UTGFEE6457426GYR"
         }
       }
 
@@ -222,9 +235,10 @@ describe DriversController do
       invalid_id = -1
       # Set up the form data
       driver_hash = {
-        driver: {
-        name: "Driver June Bug",
-        vin: "UTGFEE6457426GYR"
+        driver: 
+        {
+          name: "Driver June Bug",
+          vin: "UTGFEE6457426GYR"
         }
       }
 
@@ -245,11 +259,13 @@ describe DriversController do
       # Ensure there is an existing driver saved
       # Assign the existing driver's id to a local variable
       # Set up the form data so that it violates Driver validations
-      driver = Driver.create({
-        name: "June Bug",
-        vin: "UTGFEE6457426GYR",
-        available: true
-      })
+      driver = Driver.create(
+        {
+          name: "June Bug",
+          vin: "UTGFEE6457426GYR",
+          available: true
+        }
+      )
 
       driver_id = Driver.find_by(name: "June Bug").id
 
@@ -276,11 +292,13 @@ describe DriversController do
     it "destroys the driver instance in db when driver exists, then redirects" do
       # Arrange
       # Ensure there is an existing driver saved
-      driver = Driver.create({
-        name: "June Bug",
-        vin: "UTGFEE6457426GYR",
-        available: true
-      })
+      driver = Driver.create(
+        {
+          name: "June Bug",
+          vin: "UTGFEE6457426GYR",
+          available: true
+        }
+      )
       
       driver_id = Driver.find_by(name: "June Bug").id
 

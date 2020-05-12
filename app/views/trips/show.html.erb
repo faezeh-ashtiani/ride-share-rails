@@ -1,8 +1,10 @@
 <div class='trips'>
   <h2>Trip:</h2>
-  <p>Date: <%= @trip.date.to_date %></p>
-  <p>Rating: <%= @trip.rating %></p>
-  <p>Cost: $<%= @trip.cost / 100 %></p>
+  <p>Date: <%= @trip.date %></p>
+  <p>Rating: <span class='details-button'>
+    <%= link_to @trip.rating, edit_trip_path(@trip.id) %>
+  </span></p>
+  <p>Cost: $<%= @trip.cost.to_f / 100 %></p>
   <%if @trip.driver_id.nil?%>
       <em>Driver has been removed.</em>
   <%else%>

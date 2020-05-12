@@ -192,9 +192,10 @@ describe PassengersController do
       invalid_id = -1
       # Set up the form data
       passenger_hash = {
-        passenger: {
-        name: "Passenger June Bug",
-        phone_num: "209-823-4034"
+        passenger: 
+        {
+          name: "Passenger June Bug",
+          phone_num: "209-823-4034"
         }
       }
 
@@ -215,17 +216,20 @@ describe PassengersController do
       # Ensure there is an existing passenger saved
       # Assign the existing passenger's id to a local variable
       # Set up the form data so that it violates Passenger's validations
-      passenger = Passenger.create({
-        name: "June Bug",
-        phone_num: "209-823-4034"
-      })
+      passenger = Passenger.create(
+        {
+          name: "June Bug",
+          phone_num: "209-823-4034"
+        }
+      )
 
       passenger_id = Passenger.find_by(name: "June Bug").id
 
       passenger_hash = {
-        passenger: {
-        name: "June Bug",
-        phone_num: "209-823-4034"
+        passenger: 
+        {
+          name: "June Bug",
+          phone_num: "209-823-4034"
         }
       }
       passenger_hash[:passenger][:name] = nil
@@ -245,10 +249,12 @@ describe PassengersController do
     it "destroys the passenger instance in db when passenger exists, then redirects" do
       # Arrange
       # Ensure there is an existing passenger saved
-      passenger = Passenger.create({
-        name: "June Bug",
-        phone_num: "209-823-4034"
-      })
+      passenger = Passenger.create(
+        {
+          name: "June Bug",
+          phone_num: "209-823-4034"
+        }
+      )
       
       passenger_id = Passenger.find_by(name: "June Bug").id
 
